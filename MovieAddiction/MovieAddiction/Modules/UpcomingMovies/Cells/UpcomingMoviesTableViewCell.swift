@@ -17,14 +17,16 @@ class UpcomingMoviesTableViewCell: UITableViewCell, Reusable, NibLoadableView {
     
     @IBOutlet weak var skeletonView: UIView!
     
-    func configure(with movie: Movie?) {
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    func configure(with movie: MovieViewModel?) {
         if let movie = movie {
+            self.activityIndicator.stopAnimating()
             self.skeletonView.isHidden = true
             movieNameLabel?.text = movie.title
-//            genreLabel?.text
             releaseDateLabel.text = movie.releaseDate
         } else {
             self.skeletonView.isHidden = false
+            self.activityIndicator.startAnimating()
         }
     }
 }
