@@ -12,6 +12,7 @@ struct TMDbURL {
     
     static let base = "api.themoviedb.org"
     static let version = "/3"
+    
     struct Movie {
         static let upcoming = "\(version)/movie/upcoming"
         
@@ -20,6 +21,13 @@ struct TMDbURL {
             case language = "language"
             case page = "page"
             case region = "region"
+        }
+    }
+    
+    struct Genre {
+        
+        struct Movie {
+            static let list = "\(version)/genre/movie/list"
         }
     }
 }

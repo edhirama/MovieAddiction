@@ -14,11 +14,11 @@ struct Movie: Codable {
     let voteAverage: Double
     let title: String
     let popularity: Double
-    let posterPath: String
-    let originalLanguage: OriginalLanguage
+    let posterPath: String?
+    let originalLanguage: String
     let originalTitle: String
     let genreIDS: [Int]
-    let backdropPath: String
+    let backdropPath: String?
     let adult: Bool
     let overview, releaseDate: String
     
@@ -43,4 +43,7 @@ struct Movie: Codable {
 enum OriginalLanguage: String, Codable {
     case en = "en"
     case ja = "ja"
+    case fr = "fr"
+    case ko = "ko"
+    case undefined
 }

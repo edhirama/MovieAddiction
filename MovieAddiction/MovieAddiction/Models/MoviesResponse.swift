@@ -14,7 +14,7 @@ import Foundation
 
 import Foundation
 
-struct TMDbResponse: Codable {
+struct MoviesResponse: Codable {
     let results: [Movie]
     let page, totalResults: Int
     let dates: Dates

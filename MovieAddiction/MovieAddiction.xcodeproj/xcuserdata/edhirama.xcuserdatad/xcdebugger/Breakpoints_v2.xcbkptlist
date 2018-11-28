@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MovieAddiction/Network/Services/UpcomingMoviesService.swift"
-            timestampString = "565027606.013473"
+            filePath = "MovieAddiction/New Group/UpcomingMovies/UpcomingMoviesViewController.swift"
+            timestampString = "565069515.64715"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "26"
-            endingLineNumber = "26"
-            landmarkName = "retrieveList(page:completion:)"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
+            landmarkName = "onFetchCompleted(with:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

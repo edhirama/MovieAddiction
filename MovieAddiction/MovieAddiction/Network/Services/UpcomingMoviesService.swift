@@ -10,8 +10,8 @@ import Foundation
 
 class UpcomingMoviesService {
     
-    static func retrieveList(page: Int, completion: ((Result<[Movie]>) -> Void)?) {
-        let queryItems = [URLQueryItem(name: TMDbURL.Movie.ParameterKey.apiKey.rawValue, value: "API_KEY"),
+    static func retrieveList(page: Int, completion: ((Result<MoviesResponse>) -> Void)?) {
+        let queryItems = [URLQueryItem(name: TMDbURL.Movie.ParameterKey.apiKey.rawValue, value: "1f54bd990f1cdfb230adb312546d765d"),
             URLQueryItem(name: TMDbURL.Movie.ParameterKey.page.rawValue, value: String(page))]
         
         NetworkRequestImplementation.request(type: .get, host: TMDbURL.base, path: TMDbURL.Movie.upcoming, queryItems: queryItems) { (result) in
@@ -23,8 +23,8 @@ class UpcomingMoviesService {
                 
                 let decoder = JSONDecoder()
                 do {
-                    let response  = try decoder.decode(TMDbResponse.self, from: data)
-                    completion?(.success(response.results))
+                    let response  = try decoder.decode(MoviesResponse.self, from: data)
+                    completion?(.success(response))
                 } catch {
                     completion?(.failure(error))
                 }
