@@ -32,6 +32,8 @@
 		6E4AC05F21AED408009CE175 /* UpcomingMoviesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4AC05E21AED407009CE175 /* UpcomingMoviesViewModel.swift */; };
 		6E4AC06321AEDA2F009CE175 /* MovieViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4AC06221AEDA2F009CE175 /* MovieViewModel.swift */; };
 		6E4AC06521AEE52B009CE175 /* MovieDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4AC06421AEE52B009CE175 /* MovieDetailViewController.swift */; };
+		6E4AC06721AF02CF009CE175 /* ImageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4AC06621AF02CF009CE175 /* ImageHelper.swift */; };
+		6E4AC06921AF04EF009CE175 /* GenresHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4AC06821AF04EF009CE175 /* GenresHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +85,8 @@
 		6E4AC05E21AED407009CE175 /* UpcomingMoviesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingMoviesViewModel.swift; sourceTree = "<group>"; };
 		6E4AC06221AEDA2F009CE175 /* MovieViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieViewModel.swift; sourceTree = "<group>"; };
 		6E4AC06421AEE52B009CE175 /* MovieDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailViewController.swift; sourceTree = "<group>"; };
+		6E4AC06621AF02CF009CE175 /* ImageHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageHelper.swift; sourceTree = "<group>"; };
+		6E4AC06821AF04EF009CE175 /* GenresHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenresHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -270,7 +274,9 @@
 		6E4AC05821AE053B009CE175 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				6E4AC06621AF02CF009CE175 /* ImageHelper.swift */,
 				6E4AC05921AE0553009CE175 /* PersistenceHelper.swift */,
+				6E4AC06821AF04EF009CE175 /* GenresHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -427,6 +433,7 @@
 				6E4AC04921ADF3E6009CE175 /* Reusable.swift in Sources */,
 				6E4AC05121ADF42B009CE175 /* UITableView+custom.swift in Sources */,
 				6E4AC05721AE035C009CE175 /* GenresResponse.swift in Sources */,
+				6E4AC06721AF02CF009CE175 /* ImageHelper.swift in Sources */,
 				6E4ABFF921ACCF55009CE175 /* UpcomingMoviesViewController.swift in Sources */,
 				6E4AC02B21AD7680009CE175 /* TMDbURL.swift in Sources */,
 				6E4AC06321AEDA2F009CE175 /* MovieViewModel.swift in Sources */,
@@ -440,6 +447,7 @@
 				6E4AC06521AEE52B009CE175 /* MovieDetailViewController.swift in Sources */,
 				6E4AC02821AD753E009CE175 /* Movie.swift in Sources */,
 				6E4AC02E21AD7EE9009CE175 /* NetworkRequest.swift in Sources */,
+				6E4AC06921AF04EF009CE175 /* GenresHelper.swift in Sources */,
 				6E4AC05F21AED408009CE175 /* UpcomingMoviesViewModel.swift in Sources */,
 				6E4AC04C21ADF416009CE175 /* LoadingView.swift in Sources */,
 				6E4ABFF721ACCF55009CE175 /* AppDelegate.swift in Sources */,

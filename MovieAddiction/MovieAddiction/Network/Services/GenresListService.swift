@@ -10,7 +10,7 @@ import Foundation
 
 class GenresListService {
     
-    static func retrieveList(page: Int, completion: ((Result<[Genre]>) -> Void)?) {
+    static func retrieveList(completion: ((Result<[Genre]>) -> Void)?) {
         let queryItems = [URLQueryItem(name: TMDbURL.Movie.ParameterKey.apiKey.rawValue, value: "1f54bd990f1cdfb230adb312546d765d")]
         
         NetworkRequestImplementation.request(type: .get, host: TMDbURL.base, path: TMDbURL.Genre.Movie.list, queryItems: queryItems) { (result) in

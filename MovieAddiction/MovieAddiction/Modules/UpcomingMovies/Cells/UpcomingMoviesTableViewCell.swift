@@ -24,6 +24,7 @@ class UpcomingMoviesTableViewCell: UITableViewCell, Reusable, NibLoadableView {
             self.skeletonView.isHidden = true
             movieNameLabel?.text = movie.title
             releaseDateLabel.text = movie.releaseDate
+            genreLabel.text = movie.genre
         } else {
             self.skeletonView.isHidden = false
             self.activityIndicator.startAnimating()

@@ -35,17 +35,15 @@ class MovieDetailViewController: UIViewController {
         self.releaseDateLabel.text = viewModel.releaseDate
         self.overviewLabel.text = viewModel.overview
         
-        DispatchQueue.global(qos: .background).async {
 
-            if let url = URL(string: "https://image.tmdb.org/t/p/w600_and_h900_bestv2\(self.viewModel.imageURL)") {
-                if let data = try? Data(contentsOf: url) {
-                    let image: UIImage = UIImage(data: data)!
-                    DispatchQueue.main.async {
-                        self.posterImageVIew.image = image
-                    }
-                }
-            }
+        if let url = URL(string: "https://image.tmdb.org/t/p/w600_and_h900_bestv2\(self.viewModel.imageURL)") {
+            
+            ImageHelper.load(url: url, completion: { (image) in
+                self.posterImageVIew.image = image
+            })
+            
         }
+        
     }
     
     @IBAction func closeButtonClicked(_ sender: Any) {

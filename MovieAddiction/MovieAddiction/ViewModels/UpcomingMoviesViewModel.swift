@@ -37,14 +37,41 @@ class UpcomingMoviesViewModel {
         return moviesViewModels[index]
     }
     
+    func fetchData() {
+        
+        if GenresHelper.shared.genres.count == 0 {
+            let requestQueue = OperationQueue()
+            
+            let requestOperation = BlockOperation {
+                let group = DispatchGroup()
+                
+                group.enter()
+                GenresHelper.shared.retrieveGenres {
+                    group.leave()
+                }
+                
+                group.wait()
+                
+                self.fetchMovies()
+                
+            }
+            
+            requestQueue.addOperation(requestOperation)
+            
+        } else {
+            fetchMovies()
+        }
+    }
+    
     func fetchMovies() {
+       
         
         guard !isFetchInProgress else {
             return
         }
         
         isFetchInProgress = true
-        print(currentPage)
+        
         UpcomingMoviesService.retrieveList(page: currentPage) { [weak self] (result) in
             switch (result) {
             case .failure(let error):

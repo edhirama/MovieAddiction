@@ -18,7 +18,7 @@ struct MovieViewModel {
     
     init(movie: Movie) {
         self.title = movie.title
-        self.genre = ""//TODO get genre string
+        self.genre = GenresHelper.shared.genres[movie.genreIDS[0]]?.name ?? ""
         self.overview = movie.overview
         self.imageURL = movie.posterPath != nil ? movie.posterPath! : (movie.backdropPath ?? "")
         

@@ -19,7 +19,7 @@ class UpcomingMoviesViewController: UIViewController {
         super.viewDidLoad()
         self.viewModel.delegate = self
         LoadingIndicator.shared.show()
-        viewModel.fetchMovies()
+        viewModel.fetchData()
         self.setupTableView()
     }
     
@@ -55,18 +55,13 @@ extension UpcomingMoviesViewController: UITableViewDataSource, UITableViewDelega
     }
     
     func loadImage(cell: UpcomingMoviesTableViewCell, indexPath: IndexPath) {
-        DispatchQueue.global(qos: .background).async {
-            let movie = self.viewModel.movie(at: indexPath.row)
-            let imageURL = movie.posterPath != nil ? movie.posterPath! : (movie.backdropPath ?? "")
-            if let url = URL(string: "https://image.tmdb.org/t/p/w600_and_h900_bestv2\(imageURL)") {
-                if let data = try? Data(contentsOf: url) {
-                    let image: UIImage = UIImage(data: data)!
-                    DispatchQueue.main.async {
-                        if let updatedCell = self.tableView.cellForRow(at: indexPath) as? UpcomingMoviesTableViewCell {
-                            self.imageCache.setObject(image, forKey: NSString(string: movie.originalTitle))
-                            updatedCell.posterImageView.image = image
-                        }
-                    }
+        let movie = self.viewModel.movie(at: indexPath.row)
+        let imageURL = movie.posterPath != nil ? movie.posterPath! : (movie.backdropPath ?? "")
+        if let url = URL(string: "https://image.tmdb.org/t/p/w600_and_h900_bestv2\(imageURL)") {
+            ImageHelper.load(url: url) { (image) in
+                if let updatedCell = self.tableView.cellForRow(at: indexPath) as? UpcomingMoviesTableViewCell {
+                    self.imageCache.setObject(image, forKey: NSString(string: movie.originalTitle))
+                    updatedCell.posterImageView.image = image
                 }
             }
         }
