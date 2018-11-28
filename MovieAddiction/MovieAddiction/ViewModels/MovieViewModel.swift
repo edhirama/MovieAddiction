@@ -18,9 +18,14 @@ struct MovieViewModel {
     
     init(movie: Movie) {
         self.title = movie.title
-        self.genre = GenresHelper.shared.genres[movie.genreIDS[0]]?.name ?? ""
+        if movie.genreIDS.count > 0 {
+            self.genre = GenresHelper.shared.genres[movie.genreIDS[0]]?.name ?? ""
+        } else {
+            self.genre = ""
+        }
         self.overview = movie.overview
-        self.imageURL = movie.posterPath != nil ? movie.posterPath! : (movie.backdropPath ?? "")
+        let imagePath = movie.posterPath != nil ? movie.posterPath! : (movie.backdropPath ?? "")
+        self.imageURL =  "\(TMDbURL.image)\(imagePath)"
         
         let dateFormatterGet = DateFormatter()
         dateFormatterGet.dateFormat = "yyyy-MM-dd"

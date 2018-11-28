@@ -44,7 +44,7 @@ extension UpcomingMoviesViewController: UITableViewDataSource, UITableViewDelega
             cell.configure(with: .none)
         } else {
             cell.configure(with: viewModel.movieViewModel(at: indexPath.row))
-            if let cachedImage = self.imageCache.object(forKey: NSString(string: viewModel.movie(at: indexPath.row).originalTitle)) {
+            if let cachedImage = self.imageCache.object(forKey: NSString(string: viewModel.movie(at: indexPath.row).title)) {
                 cell.posterImageView.image = cachedImage
             } else {
                 loadImage(cell: cell, indexPath: indexPath)
@@ -55,12 +55,11 @@ extension UpcomingMoviesViewController: UITableViewDataSource, UITableViewDelega
     }
     
     func loadImage(cell: UpcomingMoviesTableViewCell, indexPath: IndexPath) {
-        let movie = self.viewModel.movie(at: indexPath.row)
-        let imageURL = movie.posterPath != nil ? movie.posterPath! : (movie.backdropPath ?? "")
-        if let url = URL(string: "https://image.tmdb.org/t/p/w600_and_h900_bestv2\(imageURL)") {
+        let movie = self.viewModel.movieViewModel(at: indexPath.row)
+        if let url = URL(string: movie.imageURL) {
             ImageHelper.load(url: url) { (image) in
                 if let updatedCell = self.tableView.cellForRow(at: indexPath) as? UpcomingMoviesTableViewCell {
-                    self.imageCache.setObject(image, forKey: NSString(string: movie.originalTitle))
+                    self.imageCache.setObject(image, forKey: NSString(string: movie.title))
                     updatedCell.posterImageView.image = image
                 }
             }

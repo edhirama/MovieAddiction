@@ -36,7 +36,7 @@ class MovieDetailViewController: UIViewController {
         self.overviewLabel.text = viewModel.overview
         
 
-        if let url = URL(string: "https://image.tmdb.org/t/p/w600_and_h900_bestv2\(self.viewModel.imageURL)") {
+        if let url = URL(string: self.viewModel.imageURL) {
             
             ImageHelper.load(url: url, completion: { (image) in
                 self.posterImageVIew.image = image

@@ -12,6 +12,7 @@ struct TMDbURL {
     
     static let base = "api.themoviedb.org"
     static let version = "/3"
+    static let image = "https://image.tmdb.org/t/p/w300"
     
     struct Movie {
         static let upcoming = "\(version)/movie/upcoming"
