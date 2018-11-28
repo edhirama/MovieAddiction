@@ -47,6 +47,7 @@ extension UpcomingMoviesViewController: UITableViewDataSource, UITableViewDelega
             if let cachedImage = self.imageCache.object(forKey: NSString(string: viewModel.movie(at: indexPath.row).title)) {
                 cell.posterImageView.image = cachedImage
             } else {
+                cell.posterImageView.image = nil
                 loadImage(cell: cell, indexPath: indexPath)
             }
           
@@ -96,7 +97,9 @@ extension UpcomingMoviesViewController: UpcomingMoviesViewModelDelegate {
         }
         
         let indexPathsToReload = visibleIndexPathsToReload(intersecting: newIndexPathsToReload)
-        tableView.reloadRows(at: indexPathsToReload, with: .none)
+        UIView.performWithoutAnimation {
+            tableView.reloadRows(at: indexPathsToReload, with: .none)
+        }
     }
     
     func onFetchFailed(with reason: String) {

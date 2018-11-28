@@ -22,10 +22,15 @@ class UpcomingMoviesTableViewCell: UITableViewCell, Reusable, NibLoadableView {
         if let movie = movie {
             self.activityIndicator.stopAnimating()
             self.skeletonView.isHidden = true
-            movieNameLabel?.text = movie.title
-            releaseDateLabel.text = movie.releaseDate
-            genreLabel.text = movie.genre
+            self.movieNameLabel?.text = movie.title
+            self.releaseDateLabel.text = movie.releaseDate
+            self.genreLabel.text = movie.genre
         } else {
+            self.activityIndicator.stopAnimating()
+            self.skeletonView.isHidden = true
+            self.movieNameLabel?.text = ""
+            self.releaseDateLabel.text = ""
+            self.genreLabel.text = ""
             self.skeletonView.isHidden = false
             self.activityIndicator.startAnimating()
         }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Who-nD-SEG">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -10,7 +10,24 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Upcoming Movies View Controller-->
+        <!--Navigation Controller-->
+        <scene sceneID="s6y-M5-jz1">
+            <objects>
+                <navigationController id="Who-nD-SEG" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" id="s1P-qj-rL1">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="HTr-MQ-asO"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IvK-lY-9yh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-687" y="115"/>
+        </scene>
+        <!--MovieAddiction-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="UpcomingMoviesViewController" customModule="MovieAddiction" customModuleProvider="target" sceneMemberID="viewController">
@@ -19,7 +36,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ZRg-M9-PZr">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                             </tableView>
                         </subviews>
@@ -32,6 +49,8 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <navigationItem key="navigationItem" title="MovieAddiction" id="ivC-jh-kBg"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
                     <connections>
                         <outlet property="tableView" destination="ZRg-M9-PZr" id="aaT-3Q-otT"/>
                         <segue destination="xVB-wE-akq" kind="show" identifier="showMovieDetail" id="PhV-6K-tpa"/>
@@ -103,33 +122,11 @@
                                     <constraint firstAttribute="trailing" secondItem="Nje-R9-hFU" secondAttribute="trailing" constant="16" id="kkD-vT-xsD"/>
                                 </constraints>
                             </scrollView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vR7-Ev-9Mm">
-                                <rect key="frame" x="329" y="64" width="30" height="30"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="30" id="Iy9-Ry-uvB"/>
-                                    <constraint firstAttribute="height" constant="30" id="ksJ-cW-Z2W"/>
-                                </constraints>
-                                <state key="normal" title="X">
-                                    <color key="titleColor" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="15"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="closeButtonClicked:" destination="xVB-wE-akq" eventType="touchUpInside" id="czC-tE-Xtv"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="jCf-ym-kRo" firstAttribute="leading" secondItem="u0Z-i8-uL3" secondAttribute="leading" id="1iK-Oz-pEP"/>
-                            <constraint firstItem="u0Z-i8-uL3" firstAttribute="trailing" secondItem="vR7-Ev-9Mm" secondAttribute="trailing" constant="16" id="C23-00-GKG"/>
                             <constraint firstItem="u0Z-i8-uL3" firstAttribute="trailing" secondItem="jCf-ym-kRo" secondAttribute="trailing" id="CiR-N6-y8J"/>
-                            <constraint firstItem="u0Z-i8-uL3" firstAttribute="top" secondItem="vR7-Ev-9Mm" secondAttribute="top" id="HNB-G9-jeh"/>
                             <constraint firstItem="pR9-46-sJu" firstAttribute="trailing" secondItem="u0Z-i8-uL3" secondAttribute="trailing" constant="-16" id="MNO-bC-7hm"/>
                             <constraint firstItem="u0Z-i8-uL3" firstAttribute="trailing" secondItem="vq3-gY-yDH" secondAttribute="trailing" id="PZq-1C-yE3"/>
                             <constraint firstItem="jCf-ym-kRo" firstAttribute="top" secondItem="bL3-T2-dbZ" secondAttribute="top" constant="20" id="T12-Cn-8rX"/>

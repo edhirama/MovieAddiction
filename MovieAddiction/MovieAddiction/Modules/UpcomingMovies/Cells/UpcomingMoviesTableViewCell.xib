@@ -19,35 +19,6 @@
                 <rect key="frame" x="0.0" y="0.0" width="382" height="188.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3ib-Lp-16Z" userLabel="Skeleton View">
-                        <rect key="frame" x="32" y="27" width="326" height="117"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fYM-fO-Ogj" userLabel="Image View Skeleton">
-                                <rect key="frame" x="0.0" y="0.0" width="78" height="117"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3ha-Lj-TfB" userLabel="Genre Skeleton View">
-                                <rect key="frame" x="86" y="4" width="236" height="16"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YWD-1q-1Oe" userLabel="Title Skeleton View">
-                                <rect key="frame" x="86" y="27.5" width="236" height="19.5"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i9b-B7-rG1" userLabel="Release Date Skeleton View">
-                                <rect key="frame" x="86" y="97" width="236" height="16"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="oe4-4E-t9x">
-                                <rect key="frame" x="153" y="48.5" width="20" height="20"/>
-                            </activityIndicatorView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="oe4-4E-t9x" firstAttribute="centerY" secondItem="3ib-Lp-16Z" secondAttribute="centerY" id="NRh-sh-reF"/>
-                            <constraint firstItem="oe4-4E-t9x" firstAttribute="centerX" secondItem="3ib-Lp-16Z" secondAttribute="centerX" id="R54-ll-tuD"/>
-                        </constraints>
-                    </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PzS-vT-Axe">
                         <rect key="frame" x="32" y="27" width="326" height="117"/>
                         <subviews>
@@ -94,6 +65,35 @@
                             <constraint firstItem="cRH-pP-38J" firstAttribute="top" secondItem="PzS-vT-Axe" secondAttribute="top" constant="4" id="q8m-QS-tK6"/>
                             <constraint firstItem="ri2-PK-gUT" firstAttribute="top" secondItem="cRH-pP-38J" secondAttribute="bottom" constant="7.5" id="qh1-HB-HKR"/>
                             <constraint firstItem="6CE-23-Fl7" firstAttribute="leading" secondItem="PzS-vT-Axe" secondAttribute="leading" id="y28-fN-eec"/>
+                        </constraints>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3ib-Lp-16Z" userLabel="Skeleton View">
+                        <rect key="frame" x="32" y="27" width="326" height="117"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fYM-fO-Ogj" userLabel="Image View Skeleton">
+                                <rect key="frame" x="0.0" y="0.0" width="78" height="117"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3ha-Lj-TfB" userLabel="Genre Skeleton View">
+                                <rect key="frame" x="86" y="4" width="236" height="16"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YWD-1q-1Oe" userLabel="Title Skeleton View">
+                                <rect key="frame" x="86" y="27.5" width="236" height="19.5"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i9b-B7-rG1" userLabel="Release Date Skeleton View">
+                                <rect key="frame" x="86" y="97" width="236" height="16"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="oe4-4E-t9x">
+                                <rect key="frame" x="153" y="48.5" width="20" height="20"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="oe4-4E-t9x" firstAttribute="centerY" secondItem="3ib-Lp-16Z" secondAttribute="centerY" id="NRh-sh-reF"/>
+                            <constraint firstItem="oe4-4E-t9x" firstAttribute="centerX" secondItem="3ib-Lp-16Z" secondAttribute="centerX" id="R54-ll-tuD"/>
                         </constraints>
                     </view>
                 </subviews>

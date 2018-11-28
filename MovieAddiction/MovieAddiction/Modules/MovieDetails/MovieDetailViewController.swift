@@ -45,8 +45,5 @@ class MovieDetailViewController: UIViewController {
         }
         
     }
-    
-    @IBAction func closeButtonClicked(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
-    }
+
 }
