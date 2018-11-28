@@ -24,7 +24,11 @@ class MovieDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        if #available(iOS 11.0, *) {
+            self.navigationController?.navigationBar.prefersLargeTitles = false
+        } else {
+            // no code is needed
+        }
         self.configureView()
     
     }

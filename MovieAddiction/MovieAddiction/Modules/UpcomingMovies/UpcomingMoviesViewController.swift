@@ -13,7 +13,9 @@ class UpcomingMoviesViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     let imageCache = NSCache<NSString, UIImage>()
     let viewModel = UpcomingMoviesViewModel()
+    let searchController = UISearchController(searchResultsController: nil)
     
+    //MARK: Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +23,36 @@ class UpcomingMoviesViewController: UIViewController {
         LoadingIndicator.shared.show()
         viewModel.fetchData()
         self.setupTableView()
+        
+        setupSearchController()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        setupNavigationBar()
+    }
+    
+    //MARK: View Setup
+    
+    func setupNavigationBar() {
+        if #available(iOS 11.0, *) {
+            self.navigationController?.navigationBar.prefersLargeTitles = true
+            self.navigationController?.navigationItem.largeTitleDisplayMode = .automatic
+        } else {
+            // keep the navigation bar as it is
+        }
+    }
+    
+    func setupSearchController() {
+        searchController.searchResultsUpdater = self
+        searchController.delegate = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search Movies"
+        if #available(iOS 11.0, *) {
+            navigationItem.searchController = searchController
+        } else {
+            // Fallback on earlier versions
+        }
+        definesPresentationContext = true
     }
     
     func setupTableView() {
@@ -69,7 +101,9 @@ extension UpcomingMoviesViewController: UITableViewDataSource, UITableViewDelega
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.tableView.deselectRow(at: indexPath, animated: true)
-        self.performSegue(withIdentifier: "showMovieDetail", sender: self.viewModel.movieViewModel(at: indexPath.row))
+        if indexPath.row < self.viewModel.currentCount {
+            self.performSegue(withIdentifier: "showMovieDetail", sender: self.viewModel.movieViewModel(at: indexPath.row))
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -83,9 +117,17 @@ extension UpcomingMoviesViewController: UITableViewDataSource, UITableViewDelega
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        self.searchController.searchBar.resignFirstResponder()
+    }
 }
 
 extension UpcomingMoviesViewController: UpcomingMoviesViewModelDelegate {
+    
+    func reloadData() {
+        tableView.reloadData()
+    }
     
     func onFetchCompleted(with newIndexPathsToReload: [IndexPath]?) {
         
@@ -128,4 +170,18 @@ private extension UpcomingMoviesViewController {
         let indexPathsIntersection = Set(indexPathsForVisibleRows).intersection(indexPaths)
         return Array(indexPathsIntersection)
     }
+}
+
+
+extension UpcomingMoviesViewController: UISearchResultsUpdating, UISearchControllerDelegate {
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        self.viewModel.filter(forSearchText: searchController.searchBar.text!)
+    }
+    
+    func didDismissSearchController(_ searchController: UISearchController) {   
+        self.viewModel.cancelSearch()
+    }
+    
+    
 }
