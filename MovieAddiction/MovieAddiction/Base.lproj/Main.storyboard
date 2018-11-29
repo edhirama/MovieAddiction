@@ -39,12 +39,54 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                             </tableView>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8K5-8r-YPz" userLabel="Error View">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tAv-td-gCx">
+                                        <rect key="frame" x="137.5" y="281.5" width="100" height="40"/>
+                                        <color key="backgroundColor" red="0.0" green="0.47772925100000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="0U4-W8-fzC"/>
+                                            <constraint firstAttribute="width" constant="100" id="Jxv-51-V85"/>
+                                        </constraints>
+                                        <state key="normal" title="Retry">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="20"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="retryButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Pv5-p9-vm3"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Oops! Something went wrong..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hH4-tI-oYP">
+                                        <rect key="frame" x="67" y="232.5" width="241" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="tAv-td-gCx" firstAttribute="centerX" secondItem="8K5-8r-YPz" secondAttribute="centerX" id="6gj-IU-BDg"/>
+                                    <constraint firstItem="tAv-td-gCx" firstAttribute="centerY" secondItem="8K5-8r-YPz" secondAttribute="centerY" id="Ubu-m6-Oce"/>
+                                    <constraint firstItem="tAv-td-gCx" firstAttribute="top" secondItem="hH4-tI-oYP" secondAttribute="bottom" constant="28" id="Wog-82-QpW"/>
+                                    <constraint firstItem="hH4-tI-oYP" firstAttribute="centerX" secondItem="tAv-td-gCx" secondAttribute="centerX" id="rDk-t4-DXL"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="8K5-8r-YPz" firstAttribute="height" secondItem="ZRg-M9-PZr" secondAttribute="height" id="7GS-A1-VWj"/>
                             <constraint firstItem="ZRg-M9-PZr" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Bhh-Y4-4Aq"/>
                             <constraint firstItem="ZRg-M9-PZr" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="FMW-YW-H7s"/>
+                            <constraint firstItem="8K5-8r-YPz" firstAttribute="centerX" secondItem="ZRg-M9-PZr" secondAttribute="centerX" id="QtB-pW-7cm"/>
                             <constraint firstItem="ZRg-M9-PZr" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="W4m-vm-ZP4"/>
+                            <constraint firstItem="8K5-8r-YPz" firstAttribute="centerY" secondItem="ZRg-M9-PZr" secondAttribute="centerY" id="X5H-JC-NmW"/>
+                            <constraint firstItem="8K5-8r-YPz" firstAttribute="width" secondItem="ZRg-M9-PZr" secondAttribute="width" id="ZPZ-rW-EBM"/>
                             <constraint firstItem="ZRg-M9-PZr" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="tbz-8u-bt4"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -52,12 +94,13 @@
                     <navigationItem key="navigationItem" title="MovieAddiction" id="ivC-jh-kBg"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
                     <connections>
+                        <outlet property="errorView" destination="8K5-8r-YPz" id="lAp-4z-obe"/>
                         <outlet property="tableView" destination="ZRg-M9-PZr" id="aaT-3Q-otT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="66" y="115"/>
+            <point key="canvasLocation" x="64.799999999999997" y="114.69265367316342"/>
         </scene>
         <!--Movie Detail View Controller-->
         <scene sceneID="4en-ea-tqj">

@@ -29,7 +29,7 @@ class LoadingIndicator: UIView {
     
     func setup() {
         
-        self.backgroundColor = UIColor.white.withAlphaComponent(0.5)
+        self.backgroundColor = UIColor.black.withAlphaComponent(0.8)
         self.frame = (UIApplication.shared.windows.first?.frame)!
         
         loader.frame = (UIApplication.shared.windows.first?.frame)!

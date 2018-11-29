@@ -12,6 +12,7 @@ class UpcomingMoviesViewController: UIViewController {
 
     let showMovieDetailsSegueIdentifier = "showMovieDetail"
     
+    @IBOutlet weak var errorView: UIView!
     @IBOutlet weak var tableView: UITableView!
     let imageCache = NSCache<NSString, UIImage>()
     let viewModel = UpcomingMoviesViewModel()
@@ -63,6 +64,15 @@ class UpcomingMoviesViewController: UIViewController {
         self.tableView.prefetchDataSource = self
         self.tableView.register(UpcomingMoviesTableViewCell.self)
     }
+    
+    // MARK: Actions
+    
+    @IBAction func retryButtonClicked(_ sender: Any) {
+        LoadingIndicator.shared.show()
+        self.errorView.isHidden = true
+        self.viewModel.fetchData()
+    }
+    
 }
 
 extension UpcomingMoviesViewController: UITableViewDataSource, UITableViewDelegate {
@@ -131,15 +141,17 @@ extension UpcomingMoviesViewController: UITableViewDataSource, UITableViewDelega
 extension UpcomingMoviesViewController: UpcomingMoviesViewModelDelegate {
     
     func reloadData() {
+        self.errorView.isHidden = true
         tableView.reloadData()
     }
     
     func onFetchCompleted(with newIndexPathsToReload: [IndexPath]?) {
         
+        self.errorView.isHidden = true
+        LoadingIndicator.shared.hide()
         guard let newIndexPathsToReload = newIndexPathsToReload else {
             tableView.isHidden = false
             tableView.reloadData()
-            LoadingIndicator.shared.hide()
             return
         }
         
@@ -150,9 +162,9 @@ extension UpcomingMoviesViewController: UpcomingMoviesViewModelDelegate {
     }
     
     func onFetchFailed(with reason: String) {
-        //TODO handle error
-        print(reason)
         LoadingIndicator.shared.hide()
+        self.errorView.isHidden = false
+        print(reason)
     }
 }
 
