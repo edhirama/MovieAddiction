@@ -30,10 +30,9 @@ class MovieDetailViewController: UIViewController {
             // no code is needed
         }
         self.configureView()
+}
     
-    }
-    
-    func configureView(){
+    func configureView() {
         self.genreLabel.text = viewModel.genre
         self.movieTitleLabel.text = viewModel.title
         self.releaseDateLabel.text = viewModel.releaseDate
@@ -41,13 +40,14 @@ class MovieDetailViewController: UIViewController {
         
 
         if let url = URL(string: self.viewModel.imageURL) {
-            
             ImageHelper.load(url: url, completion: { (image) in
                 self.posterImageVIew.image = image
             })
-            
         }
         
     }
 
+    @IBAction func closeButtonClicked(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
 }

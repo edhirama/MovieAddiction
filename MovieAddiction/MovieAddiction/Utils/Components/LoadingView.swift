@@ -41,13 +41,14 @@ class LoadingIndicator: UIView {
     }
     
     func show() {
-        let application = UIApplication.shared.delegate as! AppDelegate
-        
-        application.window?.addSubview(self)
-        
-        loader.startAnimating()
-        
-        loader.bringSubviewToFront((application.window?.rootViewController?.view)!)
+        if let application = UIApplication.shared.delegate as? AppDelegate {
+            
+            application.window?.addSubview(self)
+            
+            loader.startAnimating()
+            
+            loader.bringSubviewToFront((application.window?.rootViewController?.view)!)
+        }
     }
     
     func hide() {

@@ -19,12 +19,7 @@ enum RequestType: String {
     case put = "PUT"
 }
 
-protocol NetworkRequest {
-    static func request(type: RequestType, host:String, path: String, queryItems: [URLQueryItem], completion:  ((Result<Data>) -> Void)?)
-}
-
-class NetworkRequestImplementation: NetworkRequest {
-    
+class NetworkRequest {
     
     static func request(type: RequestType, host:String, path: String, queryItems: [URLQueryItem], completion:  ((Result<Data>) -> Void)?) {
         var urlComponents = URLComponents()

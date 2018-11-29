@@ -53,7 +53,6 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
                     <connections>
                         <outlet property="tableView" destination="ZRg-M9-PZr" id="aaT-3Q-otT"/>
-                        <segue destination="xVB-wE-akq" kind="show" identifier="showMovieDetail" id="PhV-6K-tpa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -63,7 +62,7 @@
         <!--Movie Detail View Controller-->
         <scene sceneID="4en-ea-tqj">
             <objects>
-                <viewController id="xVB-wE-akq" customClass="MovieDetailViewController" customModule="MovieAddiction" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MovieDetailViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="xVB-wE-akq" customClass="MovieDetailViewController" customModule="MovieAddiction" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bL3-T2-dbZ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -122,21 +121,42 @@
                                     <constraint firstAttribute="trailing" secondItem="Nje-R9-hFU" secondAttribute="trailing" constant="16" id="kkD-vT-xsD"/>
                                 </constraints>
                             </scrollView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HA7-Nk-ex1">
+                                <rect key="frame" x="329" y="36" width="30" height="30"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="30" id="O3Y-sx-UNa"/>
+                                    <constraint firstAttribute="height" constant="30" id="ceJ-xD-kE5"/>
+                                </constraints>
+                                <state key="normal" title="X">
+                                    <color key="titleColor" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="15"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="closeButtonClicked:" destination="xVB-wE-akq" eventType="touchUpInside" id="XKL-P3-c66"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="jCf-ym-kRo" firstAttribute="leading" secondItem="u0Z-i8-uL3" secondAttribute="leading" id="1iK-Oz-pEP"/>
                             <constraint firstItem="u0Z-i8-uL3" firstAttribute="trailing" secondItem="jCf-ym-kRo" secondAttribute="trailing" id="CiR-N6-y8J"/>
+                            <constraint firstItem="u0Z-i8-uL3" firstAttribute="top" secondItem="HA7-Nk-ex1" secondAttribute="top" constant="-16" id="E2d-We-s4v"/>
                             <constraint firstItem="pR9-46-sJu" firstAttribute="trailing" secondItem="u0Z-i8-uL3" secondAttribute="trailing" constant="-16" id="MNO-bC-7hm"/>
                             <constraint firstItem="u0Z-i8-uL3" firstAttribute="trailing" secondItem="vq3-gY-yDH" secondAttribute="trailing" id="PZq-1C-yE3"/>
                             <constraint firstItem="jCf-ym-kRo" firstAttribute="top" secondItem="bL3-T2-dbZ" secondAttribute="top" constant="20" id="T12-Cn-8rX"/>
+                            <constraint firstItem="u0Z-i8-uL3" firstAttribute="trailing" secondItem="HA7-Nk-ex1" secondAttribute="trailing" constant="16" id="UHk-jb-EOy"/>
                             <constraint firstAttribute="bottom" secondItem="jCf-ym-kRo" secondAttribute="bottom" id="Uco-Tu-aSI"/>
                             <constraint firstItem="vq3-gY-yDH" firstAttribute="width" secondItem="u0Z-i8-uL3" secondAttribute="width" id="hBL-kv-YeH"/>
                             <constraint firstItem="u0Z-i8-uL3" firstAttribute="trailing" secondItem="qnf-kJ-mOu" secondAttribute="trailing" constant="16" id="l0P-Ft-Ryg"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="u0Z-i8-uL3"/>
                     </view>
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
                     <connections>
                         <outlet property="genreLabel" destination="Nje-R9-hFU" id="qYN-sV-hyh"/>
                         <outlet property="movieTitleLabel" destination="qnf-kJ-mOu" id="Bku-CB-HYd"/>

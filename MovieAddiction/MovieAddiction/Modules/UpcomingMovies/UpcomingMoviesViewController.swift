@@ -10,6 +10,8 @@ import UIKit
 
 class UpcomingMoviesViewController: UIViewController {
 
+    let showMovieDetailsSegueIdentifier = "showMovieDetail"
+    
     @IBOutlet weak var tableView: UITableView!
     let imageCache = NSCache<NSString, UIImage>()
     let viewModel = UpcomingMoviesViewModel()
@@ -90,9 +92,9 @@ extension UpcomingMoviesViewController: UITableViewDataSource, UITableViewDelega
     func loadImage(cell: UpcomingMoviesTableViewCell, indexPath: IndexPath) {
         let movie = self.viewModel.movieViewModel(at: indexPath.row)
         if let url = URL(string: movie.imageURL) {
-            ImageHelper.load(url: url) { (image) in
-                if let updatedCell = self.tableView.cellForRow(at: indexPath) as? UpcomingMoviesTableViewCell {
-                    self.imageCache.setObject(image, forKey: NSString(string: movie.title))
+            ImageHelper.load(url: url) { [weak self] (image) in
+                if let updatedCell = self?.tableView.cellForRow(at: indexPath) as? UpcomingMoviesTableViewCell {
+                    self?.imageCache.setObject(image, forKey: NSString(string: movie.title))
                     updatedCell.posterImageView.image = image
                 }
             }
@@ -102,12 +104,15 @@ extension UpcomingMoviesViewController: UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.tableView.deselectRow(at: indexPath, animated: true)
         if indexPath.row < self.viewModel.currentCount {
-            self.performSegue(withIdentifier: "showMovieDetail", sender: self.viewModel.movieViewModel(at: indexPath.row))
+            if let movieDetails = storyboard!.instantiateViewController(withIdentifier: "MovieDetailViewController") as? MovieDetailViewController {
+                movieDetails.viewModel = self.viewModel.movieViewModel(at: indexPath.row)
+                present(movieDetails, animated: true, completion: nil)
+            }
         }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showMovieDetail" {
+        if segue.identifier == showMovieDetailsSegueIdentifier {
             if let destinationViewController = segue.destination as? MovieDetailViewController, let viewModel = sender as? MovieViewModel {
                 destinationViewController.viewModel = viewModel
             }
@@ -182,6 +187,4 @@ extension UpcomingMoviesViewController: UISearchResultsUpdating, UISearchControl
     func didDismissSearchController(_ searchController: UISearchController) {   
         self.viewModel.cancelSearch()
     }
-    
-    
 }

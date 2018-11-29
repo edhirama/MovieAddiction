@@ -43,7 +43,7 @@ class UpcomingMoviesViewModel {
         return isFiltering ? filteredMoviesViewModels[index] : moviesViewModels[index]
     }
     
-    //MARK: Network methods
+    // MARK: Network methods
     
     func fetchData() {
         if GenresHelper.shared.genres.count == 0 {
@@ -77,31 +77,31 @@ class UpcomingMoviesViewModel {
         
         isFetchInProgress = true
         
-        UpcomingMoviesService.retrieveList(page: currentPage) { [weak self] (result) in
+        UpcomingMoviesService.retrieveList(page: currentPage) { (result) in
             switch (result) {
             case .failure(let error):
                 DispatchQueue.main.async {
-                    self?.isFetchInProgress = false
-                    self?.delegate?.onFetchFailed(with: error.localizedDescription)
+                    self.isFetchInProgress = false
+                    self.delegate?.onFetchFailed(with: error.localizedDescription)
                 }
                 print(error)
                 break
             case .success(let response):
-                self?.currentPage += 1
-                if let total = self?.total, total == 0 {
-                    self?.total = response.totalResults
+                self.currentPage += 1
+                if self.total == 0 {
+                    self.total = response.totalResults
                 }
-                self?.movies.append(contentsOf: response.results)
-                self?.moviesViewModels.append(contentsOf:  response.results.map({ (movie) -> MovieViewModel in
+                self.movies.append(contentsOf: response.results)
+                self.moviesViewModels.append(contentsOf:  response.results.map({ (movie) -> MovieViewModel in
                     return MovieViewModel(movie: movie)
                 }))
-                self?.isFetchInProgress = false
+                self.isFetchInProgress = false
                 
                 if response.page > 1 {
-                    let indexPathsToReload = self?.calculateIndexPathsToReload(from: response.results)
-                    self?.delegate?.onFetchCompleted(with: indexPathsToReload)
+                    let indexPathsToReload = self.calculateIndexPathsToReload(from: response.results)
+                    self.delegate?.onFetchCompleted(with: indexPathsToReload)
                 } else {
-                    self?.delegate?.onFetchCompleted(with: .none)
+                    self.delegate?.onFetchCompleted(with: .none)
                 }
                 break
             }
