@@ -84,9 +84,9 @@ class UpcomingMoviesViewModel {
         provider.retrieveList(page: currentPage) { [weak self] (result) in
             guard let self = self else { return }
             DispatchQueue.main.async {
+                self.isFetchInProgress = false
                 switch (result) {
                 case .failure(let error):
-                    self.isFetchInProgress = false
                     self.delegate?.onFetchFailed(with: error.localizedDescription)
                     break
                 case .success(let response):
@@ -98,7 +98,6 @@ class UpcomingMoviesViewModel {
                         return MovieViewModel(movie: movie)
                     })
                     self.moviesViewModels.append(contentsOf: newMoviesViewModels)
-                    self.isFetchInProgress = false
 
                     if response.page > 1 {
                         let indexPathsToReload = self.calculateIndexPathsToReload(from: newMoviesViewModels)
@@ -115,7 +114,7 @@ class UpcomingMoviesViewModel {
     //MARK: Search methods
     
     func filter(forSearchText searchText: String, scope: String = "All") {
-        
+        guard !searchText.isEmpty else { return }
         self.isFiltering = true
 
         filteredMoviesViewModels = moviesViewModels.filter({ movieVM -> Bool in

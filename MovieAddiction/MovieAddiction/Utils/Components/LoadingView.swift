@@ -33,7 +33,7 @@ class LoadingIndicator: UIView {
         self.frame = (UIApplication.shared.windows.first?.frame)!
         
         loader.frame = (UIApplication.shared.windows.first?.frame)!
-        loader.style = .whiteLarge
+        loader.style = .large
         loader.center = self.center
         loader.color = UIColor.darkGray
         self.addSubview(loader)

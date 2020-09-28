@@ -50,11 +50,7 @@ class UpcomingMoviesViewController: UIViewController {
         searchController.delegate = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search Movies"
-        if #available(iOS 11.0, *) {
-            navigationItem.searchController = searchController
-        } else {
-            // Fallback on earlier versions
-        }
+        navigationItem.searchController = searchController
         definesPresentationContext = true
     }
     
@@ -164,7 +160,6 @@ extension UpcomingMoviesViewController: UpcomingMoviesViewModelDelegate {
     func onFetchFailed(with reason: String) {
         LoadingIndicator.shared.hide()
         self.errorView.isHidden = false
-        print(reason)
     }
 }
 
@@ -193,7 +188,7 @@ private extension UpcomingMoviesViewController {
 extension UpcomingMoviesViewController: UISearchResultsUpdating, UISearchControllerDelegate {
     
     func updateSearchResults(for searchController: UISearchController) {
-        self.viewModel.filter(forSearchText: searchController.searchBar.text!)
+        self.viewModel.filter(forSearchText: searchController.searchBar.text ?? "")
     }
     
     func didDismissSearchController(_ searchController: UISearchController) {   
