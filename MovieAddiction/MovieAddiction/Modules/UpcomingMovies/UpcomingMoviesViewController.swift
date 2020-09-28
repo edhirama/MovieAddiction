@@ -88,7 +88,7 @@ extension UpcomingMoviesViewController: UITableViewDataSource, UITableViewDelega
             cell.configure(with: .none)
         } else {
             cell.configure(with: viewModel.movieViewModel(at: indexPath.row))
-            if let cachedImage = self.imageCache.object(forKey: NSString(string: viewModel.movie(at: indexPath.row).title)) {
+            if let cachedImage = self.imageCache.object(forKey: NSString(string: viewModel.movieViewModel(at: indexPath.row).title)) {
                 cell.posterImageView.image = cachedImage
             } else {
                 cell.posterImageView.image = nil
