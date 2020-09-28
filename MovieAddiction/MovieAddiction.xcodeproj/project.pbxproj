@@ -170,7 +170,6 @@
 		6E4AC02421ACD370009CE175 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				6E4AC03721ADCE94009CE175 /* Modules */,
 				6E4AC02521AD7043009CE175 /* MoviesResponse.swift */,
 				6E4AC05621AE035C009CE175 /* GenresResponse.swift */,
 				6E4AC02721AD753D009CE175 /* Movie.swift */,
@@ -207,14 +206,6 @@
 				6E4AC05221AE0216009CE175 /* GenresListService.swift */,
 			);
 			path = Services;
-			sourceTree = "<group>";
-		};
-		6E4AC03721ADCE94009CE175 /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Modules;
-			path = "New Group";
 			sourceTree = "<group>";
 		};
 		6E4AC03821ADCEAA009CE175 /* Modules */ = {
@@ -358,18 +349,21 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1010;
-				LastUpgradeCheck = 1010;
+				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = Edgar;
 				TargetAttributes = {
 					6E4ABFF221ACCF55009CE175 = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1200;
 					};
 					6E4AC00621ACCF5D009CE175 = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1200;
 						TestTargetID = 6E4ABFF221ACCF55009CE175;
 					};
 					6E4AC01121ACCF5D009CE175 = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1200;
 						TestTargetID = 6E4ABFF221ACCF55009CE175;
 					};
 				};
@@ -527,6 +521,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -552,7 +547,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -588,6 +583,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -607,7 +603,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -624,14 +620,14 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KTK8Q5C499;
 				INFOPLIST_FILE = MovieAddiction/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.edhirama.MovieAddiction;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -643,14 +639,14 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KTK8Q5C499;
 				INFOPLIST_FILE = MovieAddiction/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.edhirama.MovieAddiction;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -670,7 +666,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.edhirama.MovieAddictionTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MovieAddiction.app/MovieAddiction";
 			};
@@ -691,7 +687,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.edhirama.MovieAddictionTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MovieAddiction.app/MovieAddiction";
 			};
@@ -711,7 +707,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.edhirama.MovieAddictionUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = MovieAddiction;
 			};
@@ -731,7 +727,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.edhirama.MovieAddictionUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = MovieAddiction;
 			};
