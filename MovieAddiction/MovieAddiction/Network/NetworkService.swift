@@ -37,9 +37,8 @@ final class HTTPService: NetworkService {
         urlComponents.scheme = endpoint.scheme
         urlComponents.host = endpoint.host
         urlComponents.path = endpoint.path
-        let queryItems = [URLQueryItem(name: TMDbURL.Movie.ParameterKey.apiKey.rawValue, value: "1f54bd990f1cdfb230adb312546d765d")]
-
-        urlComponents.queryItems = queryItems
+        urlComponents.queryItems = makeQueryItems(fromEndpoint: endpoint)
+        
         guard let url = urlComponents.url else {
             completionHandler(.failure(APIError.malformedURL))
             return
@@ -56,6 +55,15 @@ final class HTTPService: NetworkService {
             }
         }
         urlSessionTask?.resume()
+    }
+
+    private func makeQueryItems(fromEndpoint endpoint: Endpoint) -> [URLQueryItem]? {
+        guard let queryArguments = endpoint.queryArguments else { return nil }
+        var queryItems: [URLQueryItem] = .init()
+        for queryItem in queryArguments {
+            queryItems.append(URLQueryItem(name: queryItem.key, value: queryItem.value))
+        }
+        return queryItems
     }
 
     private func makeRequest(fromURL url: URL, withAdditionalBodyArguments additionalBodyArguments: [String: Any]?) -> URLRequest {
