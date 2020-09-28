@@ -8,15 +8,15 @@
 
 import UIKit
 
-class UpcomingMoviesViewController: UIViewController {
+final class UpcomingMoviesViewController: UIViewController {
 
     let showMovieDetailsSegueIdentifier = "showMovieDetail"
     
     @IBOutlet weak var errorView: UIView!
     @IBOutlet weak var tableView: UITableView!
     let imageCache = NSCache<NSString, UIImage>()
-    let viewModel = UpcomingMoviesViewModel(provider: RemoteUpcomingMoviesProvider(networkService: HTTPService(endpoint: UpcomingMoviesEndpoint())))
-    let searchController = UISearchController(searchResultsController: nil)
+    private let viewModel = UpcomingMoviesViewModel(provider: RemoteUpcomingMoviesProvider(networkService: HTTPService(endpoint: UpcomingMoviesEndpoint())))
+    private let searchController = UISearchController(searchResultsController: nil)
     
     //MARK: Lifecycle
     
@@ -36,7 +36,7 @@ class UpcomingMoviesViewController: UIViewController {
     
     //MARK: View Setup
     
-    func setupNavigationBar() {
+    private func setupNavigationBar() {
         if #available(iOS 11.0, *) {
             self.navigationController?.navigationBar.prefersLargeTitles = true
             self.navigationController?.navigationItem.largeTitleDisplayMode = .automatic
@@ -45,7 +45,7 @@ class UpcomingMoviesViewController: UIViewController {
         }
     }
     
-    func setupSearchController() {
+    private func setupSearchController() {
         searchController.searchResultsUpdater = self
         searchController.delegate = self
         searchController.obscuresBackgroundDuringPresentation = false
@@ -54,7 +54,7 @@ class UpcomingMoviesViewController: UIViewController {
         definesPresentationContext = true
     }
     
-    func setupTableView() {
+    private func setupTableView() {
         self.tableView.dataSource = self
         self.tableView.delegate = self
         self.tableView.prefetchDataSource = self
@@ -137,29 +137,34 @@ extension UpcomingMoviesViewController: UITableViewDataSource, UITableViewDelega
 extension UpcomingMoviesViewController: UpcomingMoviesViewModelDelegate {
     
     func reloadData() {
-        self.errorView.isHidden = true
-        tableView.reloadData()
+        DispatchQueue.main.async {
+            self.errorView.isHidden = true
+            self.tableView.reloadData()
+        }
     }
     
     func onFetchCompleted(with newIndexPathsToReload: [IndexPath]?) {
-        
-        self.errorView.isHidden = true
-        LoadingIndicator.shared.hide()
-        guard let newIndexPathsToReload = newIndexPathsToReload else {
-            tableView.isHidden = false
-            tableView.reloadData()
-            return
-        }
-        
-        let indexPathsToReload = visibleIndexPathsToReload(intersecting: newIndexPathsToReload)
-        UIView.performWithoutAnimation {
-            tableView.reloadRows(at: indexPathsToReload, with: .none)
+        DispatchQueue.main.async {
+            self.errorView.isHidden = true
+            LoadingIndicator.shared.hide()
+            guard let newIndexPathsToReload = newIndexPathsToReload else {
+                self.tableView.isHidden = false
+                self.tableView.reloadData()
+                return
+            }
+
+            let indexPathsToReload = self.visibleIndexPathsToReload(intersecting: newIndexPathsToReload)
+            UIView.performWithoutAnimation {
+                self.tableView.reloadRows(at: indexPathsToReload, with: .none)
+            }
         }
     }
     
     func onFetchFailed(with reason: String) {
-        LoadingIndicator.shared.hide()
-        self.errorView.isHidden = false
+        DispatchQueue.main.async {
+            LoadingIndicator.shared.hide()
+            self.errorView.isHidden = false
+        }
     }
 }
 

@@ -83,30 +83,28 @@ class UpcomingMoviesViewModel {
 
         provider.retrieveList(page: currentPage) { [weak self] (result) in
             guard let self = self else { return }
-            DispatchQueue.main.async {
-                self.isFetchInProgress = false
-                switch (result) {
-                case .failure(let error):
-                    self.delegate?.onFetchFailed(with: error.localizedDescription)
-                    break
-                case .success(let response):
-                    self.currentPage += 1
-                    if self.total == 0 {
-                        self.total = response.totalResults
-                    }
-                    let newMoviesViewModels = response.results.map({ (movie) -> MovieViewModel in
-                        return MovieViewModel(movie: movie)
-                    })
-                    self.moviesViewModels.append(contentsOf: newMoviesViewModels)
-
-                    if response.page > 1 {
-                        let indexPathsToReload = self.calculateIndexPathsToReload(from: newMoviesViewModels)
-                        self.delegate?.onFetchCompleted(with: indexPathsToReload)
-                    } else {
-                        self.delegate?.onFetchCompleted(with: .none)
-                    }
-                    break
+            self.isFetchInProgress = false
+            switch (result) {
+            case .failure(let error):
+                self.delegate?.onFetchFailed(with: error.localizedDescription)
+                break
+            case .success(let response):
+                self.currentPage += 1
+                if self.total == 0 {
+                    self.total = response.totalResults
                 }
+                let newMoviesViewModels = response.results.map({ (movie) -> MovieViewModel in
+                    return MovieViewModel(movie: movie)
+                })
+                self.moviesViewModels.append(contentsOf: newMoviesViewModels)
+
+                if response.page > 1 {
+                    let indexPathsToReload = self.calculateIndexPathsToReload(from: newMoviesViewModels)
+                    self.delegate?.onFetchCompleted(with: indexPathsToReload)
+                } else {
+                    self.delegate?.onFetchCompleted(with: .none)
+                }
+                break
             }
         }
     }
