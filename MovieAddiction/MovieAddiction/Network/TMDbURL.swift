@@ -8,27 +8,22 @@
 
 import Foundation
 
+enum APIVersion: String {
+    case v3 = "/3"
+}
+
 struct TMDbURL {
     
     static let base = "api.themoviedb.org"
-    static let version = "/3"
     static let image = "https://image.tmdb.org/t/p/w300"
     
     struct Movie {
-        static let upcoming = "\(version)/movie/upcoming"
         
         enum ParameterKey: String {
             case apiKey = "api_key"
             case language = "language"
             case page = "page"
             case region = "region"
-        }
-    }
-    
-    struct Genre {
-        
-        struct Movie {
-            static let list = "\(version)/genre/movie/list"
         }
     }
 }

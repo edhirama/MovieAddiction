@@ -15,7 +15,7 @@ class UpcomingMoviesViewController: UIViewController {
     @IBOutlet weak var errorView: UIView!
     @IBOutlet weak var tableView: UITableView!
     let imageCache = NSCache<NSString, UIImage>()
-    let viewModel = UpcomingMoviesViewModel()
+    let viewModel = UpcomingMoviesViewModel(provider: RemoteUpcomingMoviesProvider(networkService: HTTPService(endpoint: UpcomingMoviesEndpoint())))
     let searchController = UISearchController(searchResultsController: nil)
     
     //MARK: Lifecycle

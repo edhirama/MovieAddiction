@@ -18,7 +18,7 @@ class GenresHelper {
     var genres = [Int: Genre]()
     
     func retrieveGenres(completion: @escaping () -> Void) {
-        GenresListService.retrieveList { (result) in
+        GenresListService(networkService: HTTPService(endpoint: GenresEndpoint())).retrieveList { (result) in
             switch result {
             case .failure(let error):
                 completion()

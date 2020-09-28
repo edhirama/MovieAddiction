@@ -34,15 +34,25 @@ class UpcomingMoviesViewModel {
     var currentCount: Int {
         return isFiltering ? filteredMovies.count : movies.count
     }
-    
+
+    private let provider: UpcomingMoviesProvider
+
+    // MARK: Constructor
+
+    init(provider: UpcomingMoviesProvider) {
+        self.provider = provider
+    }
+
+    // MARK: Table view
+
     func movie(at index: Int) -> Movie {
         return isFiltering ? filteredMovies[index] : movies[index]
     }
-    
+
     func movieViewModel(at index: Int) -> MovieViewModel {
         return isFiltering ? filteredMoviesViewModels[index] : moviesViewModels[index]
     }
-    
+
     // MARK: Network methods
     
     func fetchData() {
@@ -76,34 +86,35 @@ class UpcomingMoviesViewModel {
         }
         
         isFetchInProgress = true
-        
-        UpcomingMoviesService.retrieveList(page: currentPage) { (result) in
-            switch (result) {
-            case .failure(let error):
-                DispatchQueue.main.async {
+
+        provider.retrieveList(page: currentPage) { (result) in
+            DispatchQueue.main.async {
+                switch (result) {
+                case .failure(let error):
                     self.isFetchInProgress = false
                     self.delegate?.onFetchFailed(with: error.localizedDescription)
+
+                    print(error)
+                    break
+                case .success(let response):
+                    self.currentPage += 1
+                    if self.total == 0 {
+                        self.total = response.totalResults
+                    }
+                    self.movies.append(contentsOf: response.results)
+                    self.moviesViewModels.append(contentsOf:  response.results.map({ (movie) -> MovieViewModel in
+                        return MovieViewModel(movie: movie)
+                    }))
+                    self.isFetchInProgress = false
+
+                    if response.page > 1 {
+                        let indexPathsToReload = self.calculateIndexPathsToReload(from: response.results)
+                        self.delegate?.onFetchCompleted(with: indexPathsToReload)
+                    } else {
+                        self.delegate?.onFetchCompleted(with: .none)
+                    }
+                    break
                 }
-                print(error)
-                break
-            case .success(let response):
-                self.currentPage += 1
-                if self.total == 0 {
-                    self.total = response.totalResults
-                }
-                self.movies.append(contentsOf: response.results)
-                self.moviesViewModels.append(contentsOf:  response.results.map({ (movie) -> MovieViewModel in
-                    return MovieViewModel(movie: movie)
-                }))
-                self.isFetchInProgress = false
-                
-                if response.page > 1 {
-                    let indexPathsToReload = self.calculateIndexPathsToReload(from: response.results)
-                    self.delegate?.onFetchCompleted(with: indexPathsToReload)
-                } else {
-                    self.delegate?.onFetchCompleted(with: .none)
-                }
-                break
             }
         }
     }
