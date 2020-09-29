@@ -10,7 +10,7 @@ import RxCocoa
 import RxSwift
 
 protocol UpcomingMoviesViewModelType {
-    var moviesViewModels: PublishRelay<[MovieViewModel]> { get }
+    var moviesViewModels: BehaviorRelay<[MovieViewModel]> { get }
     var shouldHideError: Driver<Bool> { get }
     var shouldHideLoading: Driver<Bool> { get }
 
@@ -32,7 +32,7 @@ final class UpcomingMoviesViewModel: UpcomingMoviesViewModelType {
     private var isFetchInProgress = false
     private var total = 0
     private var currentPage: Int = 1
-    var moviesViewModels: PublishRelay<[MovieViewModel]> = .init()
+    var moviesViewModels: BehaviorRelay<[MovieViewModel]> = .init(value: [])
     private var filteredMoviesViewModels = [MovieViewModel]()
     
     private var isFiltering = false
@@ -124,16 +124,9 @@ final class UpcomingMoviesViewModel: UpcomingMoviesViewModelType {
                 let newMoviesViewModels = response.results.map({ (movie) -> MovieViewModel in
                     return MovieViewModel(movie: movie)
                 })
-                self.moviesViewModels.accept(newMoviesViewModels)
-
-//                self.moviesViewModels.append(contentsOf: newMoviesViewModels)
-
-                if response.page > 1 {
-                    let indexPathsToReload = self.calculateIndexPathsToReload(from: newMoviesViewModels)
-//                    self.delegate?.onFetchCompleted(with: indexPathsToReload)
-                } else {
-//                    self.delegate?.onFetchCompleted(with: .none)
-                }
+                var tempViewModels = self.moviesViewModels.value
+                tempViewModels.append(contentsOf: newMoviesViewModels)
+                self.moviesViewModels.accept(tempViewModels)
                 break
             }
         }
@@ -144,25 +137,14 @@ final class UpcomingMoviesViewModel: UpcomingMoviesViewModelType {
     func filter(forSearchText searchText: String, scope: String = "All") {
         guard !searchText.isEmpty else { return }
         self.isFiltering = true
-
-//        filteredMoviesViewModels = moviesViewModels.filter({ movieVM -> Bool in
-//            return movieVM.title.lowercased().contains(searchText.lowercased())
-//        })
-        
-//        self.delegate?.reloadData()
+        let tempViewModels = self.moviesViewModels.value
+        let filteredMoviesViewModels = tempViewModels.filter({ movieVM -> Bool in
+            return movieVM.title.lowercased().contains(searchText.lowercased())
+        })
+        moviesViewModels.accept(filteredMoviesViewModels)
     }
     
     func cancelSearch() {
         self.isFiltering = false
-//        self.delegate?.reloadData()
-    }
-    
-    //MARK:- Helper methods
-    
-    private func calculateIndexPathsToReload(from newMovies: [MovieViewModel]) -> [IndexPath] {
-//        let startIndex = moviesViewModels.count - newMovies.count
-//        let endIndex = startIndex + newMovies.count
-//        return (startIndex..<endIndex).map { IndexPath(row: $0, section: 0) }
-        return []
     }
 }
