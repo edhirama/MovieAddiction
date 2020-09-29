@@ -35,4 +35,10 @@ class UpcomingMoviesTableViewCell: UITableViewCell, Reusable, NibLoadableView {
             self.activityIndicator.startAnimating()
         }
     }
+
+    override func prepareForReuse() {
+        skeletonView.isHidden = false
+        posterImageView.image = nil
+
+    }
 }

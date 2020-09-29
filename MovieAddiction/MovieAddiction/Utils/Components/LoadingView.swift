@@ -17,8 +17,8 @@ class LoadingIndicator: UIView {
         let instance = LoadingIndicator()
         return instance
     }()
-    
-    override init(frame: CGRect) {
+
+    private override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
     }
@@ -42,11 +42,8 @@ class LoadingIndicator: UIView {
     
     func show() {
         if let application = UIApplication.shared.delegate as? AppDelegate {
-            
             application.window?.addSubview(self)
-            
             loader.startAnimating()
-            
             loader.bringSubviewToFront((application.window?.rootViewController?.view)!)
         }
     }
