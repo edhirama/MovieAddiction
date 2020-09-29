@@ -1,13 +1,20 @@
 # MovieAddiction
 [In progress] Keep up-to-date with the upcoming movies
 
-## Architecture 
+## Requirements
 
-I've decided to try MVVM with a different approach than the one that I was used to. The binding between view and view model is made through delegates.
+- Xcode 12
+- Swift 5
+- Cocoapods
 
-## Dependencies
+## UI Pattern 
 
-No dependencies were added until now.
+Currently migrating to RxSwift + RxCocoa binded MVVM.
+
+## Dependencies (Cocoapods)
+
+RxSwift -> 5.1.1
+RxCocoa -> 5.1.1
 
 ## Screenshots
 

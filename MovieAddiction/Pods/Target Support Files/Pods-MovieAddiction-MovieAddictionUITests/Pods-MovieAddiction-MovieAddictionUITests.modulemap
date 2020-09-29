@@ -1,0 +1,6 @@
+framework module Pods_MovieAddiction_MovieAddictionUITests {
+  umbrella header "Pods-MovieAddiction-MovieAddictionUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}

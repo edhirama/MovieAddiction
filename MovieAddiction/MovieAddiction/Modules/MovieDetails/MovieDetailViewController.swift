@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MovieDetailViewController: UIViewController {
+final class MovieDetailViewController: UIViewController {
 
     @IBOutlet weak var posterImageVIew: UIImageView!
     @IBOutlet weak var genreLabel: UILabel!
@@ -24,11 +24,7 @@ class MovieDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if #available(iOS 11.0, *) {
-            self.navigationController?.navigationBar.prefersLargeTitles = false
-        } else {
-            // no code is needed
-        }
+        self.navigationController?.navigationBar.prefersLargeTitles = false
         self.configureView()
 }
     
