@@ -71,6 +71,7 @@ final class UpcomingMoviesViewController: UIViewController {
     private func setupSearchController() {
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search Movies"
+        searchController.searchBar.barStyle = .black
         navigationItem.searchController = searchController
         definesPresentationContext = true
     }
@@ -96,8 +97,8 @@ final class UpcomingMoviesViewController: UIViewController {
 
     private func setupViewModelBinds() {
 
-        viewModel?.moviesViewModels.bind(
-            to: tableView.rx.items(
+        viewModel?.moviesViewModels.drive(
+            tableView.rx.items(
                 cellIdentifier: UpcomingMoviesTableViewCell.reusableIdentifier)) { _, movie, cell in
                     guard let cell = cell as? UpcomingMoviesTableViewCell else { return }
             cell.configure(with: movie)
@@ -124,7 +125,6 @@ final class UpcomingMoviesViewController: UIViewController {
         self.viewModel?.fetchData()
     }
 
-
     private func loadImage(cell: UpcomingMoviesTableViewCell, movie: MovieViewModel) {
         if let url = URL(string: movie.imageURL) {
             ImageHelper.load(url: url) { [weak self] (image) in
@@ -132,13 +132,5 @@ final class UpcomingMoviesViewController: UIViewController {
                 cell.posterImageView.image = image
             }
         }
-    }
-}
-
-private extension UpcomingMoviesViewController {
-    func visibleIndexPathsToReload(intersecting indexPaths: [IndexPath]) -> [IndexPath] {
-        let indexPathsForVisibleRows = tableView.indexPathsForVisibleRows ?? []
-        let indexPathsIntersection = Set(indexPathsForVisibleRows).intersection(indexPaths)
-        return Array(indexPathsIntersection)
     }
 }

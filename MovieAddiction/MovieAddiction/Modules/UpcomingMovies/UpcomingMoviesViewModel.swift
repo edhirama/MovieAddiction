@@ -10,7 +10,7 @@ import RxCocoa
 import RxSwift
 
 protocol UpcomingMoviesViewModelType {
-    var moviesViewModels: BehaviorRelay<[MovieViewModel]> { get }
+    var moviesViewModels: Driver<[MovieViewModel]> { get }
     var shouldHideError: Driver<Bool> { get }
     var shouldHideLoading: Driver<Bool> { get }
 
@@ -32,10 +32,15 @@ final class UpcomingMoviesViewModel: UpcomingMoviesViewModelType {
     private var isFetchInProgress = false
     private var total = 0
     private var currentPage: Int = 1
-    var moviesViewModels: BehaviorRelay<[MovieViewModel]> = .init(value: [])
-    private var filteredMoviesViewModels = [MovieViewModel]()
-    
-    private var isFiltering = false
+    var moviesViewModels: Driver<[MovieViewModel]> {
+        Driver.merge(
+            moviesRelay.asDriver(),
+            searchText.map({ text in
+                text.isEmpty ? self.viewModels : self.viewModels.filter { $0.title.lowercased().contains(text.lowercased()) }
+            }).asDriver(onErrorJustReturn: [])
+        )
+    }
+
     private let provider: UpcomingMoviesProvider
 
 
@@ -43,7 +48,10 @@ final class UpcomingMoviesViewModel: UpcomingMoviesViewModelType {
 
     private let errorSubject: PublishSubject<Bool> = .init()
     private let loadingSubject: PublishSubject<Bool> = .init()
-    private let moviesSubject: PublishSubject<[MovieViewModel]> = .init()
+    var moviesRelay: BehaviorRelay<[MovieViewModel]> = .init(value: [])
+    private let searchText: BehaviorRelay<String> = .init(value: "")
+
+    private var viewModels: [MovieViewModel] = []
 
     // MARK: Constructor
 
@@ -61,9 +69,7 @@ final class UpcomingMoviesViewModel: UpcomingMoviesViewModelType {
     }
 
     func bindSearchText(_ observable: Observable<String>) -> Disposable {
-        observable.subscribe(onNext: { [weak self] searchText in
-            self?.filter(forSearchText: searchText)
-        })
+        observable.bind(to: searchText)
     }
 
     func bindCancellingSearch(_ observable: Observable<Void>) -> Disposable {
@@ -86,7 +92,6 @@ final class UpcomingMoviesViewModel: UpcomingMoviesViewModelType {
                 GenresHelper.shared.retrieveGenres {
                     group.leave()
                 }
-                
                 group.wait()
                 
                 self.fetchMovies()
@@ -108,7 +113,6 @@ final class UpcomingMoviesViewModel: UpcomingMoviesViewModelType {
         provider.retrieveList(page: currentPage) { [weak self] (result) in
             guard let self = self else { return }
             self.isFetchInProgress = false
-
             self.loadingSubject.onNext(false)
             switch (result) {
             case .failure:
@@ -117,33 +121,16 @@ final class UpcomingMoviesViewModel: UpcomingMoviesViewModelType {
             case .success(let response):
                 self.errorSubject.onNext(false)
                 self.currentPage += 1
-                if self.total == 0 {
-                    self.total = response.totalResults
-                }
-                let newMoviesViewModels = response.results.map({ (movie) -> MovieViewModel in
-                    return MovieViewModel(movie: movie)
-                })
-                var tempViewModels = self.moviesViewModels.value
-                tempViewModels.append(contentsOf: newMoviesViewModels)
-                self.moviesViewModels.accept(tempViewModels)
+                self.total = response.totalResults
+                let newMoviesViewModels = response.results.map { MovieViewModel(movie: $0) }
+                self.viewModels.append(contentsOf: newMoviesViewModels)
+                self.moviesRelay.accept(self.viewModels)
                 break
             }
         }
     }
     
-    //MARK: Search methods
-    
-    func filter(forSearchText searchText: String, scope: String = "All") {
-        guard !searchText.isEmpty else { return }
-        self.isFiltering = true
-        let tempViewModels = self.moviesViewModels.value
-        let filteredMoviesViewModels = tempViewModels.filter({ movieVM -> Bool in
-            return movieVM.title.lowercased().contains(searchText.lowercased())
-        })
-        moviesViewModels.accept(filteredMoviesViewModels)
-    }
-    
     func cancelSearch() {
-        self.isFiltering = false
+        searchText.accept("")
     }
 }
