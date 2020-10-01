@@ -17,6 +17,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let viewModel = UpcomingMoviesViewModel(provider: RemoteUpcomingMoviesProvider(networkService: HTTPService(endpoint: UpcomingMoviesEndpoint())))
         let viewController = UpcomingMoviesViewController.instantiate(viewModel: viewModel)
         let navigationController = UINavigationController(rootViewController: viewController)
+        let navBarAppearance = UINavigationBarAppearance()
+        navBarAppearance.backgroundColor = .black
+        navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+        navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+        navigationController.navigationBar.standardAppearance = navBarAppearance
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()

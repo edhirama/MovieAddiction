@@ -10,6 +10,7 @@ import UIKit
 
 class UpcomingMoviesTableViewCell: UITableViewCell, Reusable, NibLoadableView {
     
+    @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var posterImageView: UIImageView!
     @IBOutlet weak var genreLabel: UILabel!
     @IBOutlet weak var movieNameLabel: UILabel!
@@ -18,6 +19,14 @@ class UpcomingMoviesTableViewCell: UITableViewCell, Reusable, NibLoadableView {
     @IBOutlet weak var skeletonView: UIView!
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        containerView.layer.cornerRadius = 8
+        containerView.clipsToBounds = true
+        skeletonView.layer.cornerRadius = 8
+    }
+
     func configure(with movie: MovieViewModel?) {
         if let movie = movie {
             self.activityIndicator.stopAnimating()

@@ -40,17 +40,17 @@ final class UpcomingMoviesViewController: UIViewController {
         super.init(coder: coder)
     }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func loadView() {
+        super.loadView()
         LoadingIndicator.shared.show()
         viewModel?.fetchData()
-        setupTableView()
-        setupViewModelBinds()
         setupSearchController()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         setupNavigationBar()
+        setupTableView()
+        setupViewModelBinds()
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

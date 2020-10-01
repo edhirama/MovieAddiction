@@ -51,7 +51,6 @@ final class UpcomingMoviesViewModel: UpcomingMoviesViewModelType {
         self.provider = provider
     }
 
-
     // MARK: Binds
 
 

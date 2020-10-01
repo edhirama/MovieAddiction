@@ -127,6 +127,7 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="activityIndicator" destination="oe4-4E-t9x" id="m5t-tN-O35"/>
+                <outlet property="containerView" destination="PzS-vT-Axe" id="n1Z-l1-eLq"/>
                 <outlet property="genreLabel" destination="cRH-pP-38J" id="oxM-Ov-oXv"/>
                 <outlet property="movieNameLabel" destination="ri2-PK-gUT" id="Je2-lM-1xe"/>
                 <outlet property="posterImageView" destination="6CE-23-Fl7" id="W0t-ir-ZB6"/>
